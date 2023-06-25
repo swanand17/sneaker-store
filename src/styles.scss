@@ -1,0 +1,133 @@
+@use "./styles/_colors.scss" as theme;
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+// Light Theme
+$sneaker-store-light-primary: mat.define-palette(theme.$light-primary, 300);
+$sneaker-store-light-accent: mat.define-palette(theme.$light-accent, 500);
+$sneaker-store-light-warn: mat.define-palette(mat.$red-palette);
+
+$sneaker-store-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sneaker-store-light-primary,
+      accent: $sneaker-store-light-accent,
+      warn: $sneaker-store-light-warn,
+    ),
+  )
+);
+
+// Dark Theme
+$sneaker-store-dark-primary: mat.define-palette(theme.$dark-primary, 500);
+$sneaker-store-dark-accent: mat.define-palette(theme.$light-accent, 500);
+$sneaker-store-dark-warn: mat.define-palette(mat.$red-palette);
+
+$sneaker-store-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $sneaker-store-dark-primary,
+      accent: $sneaker-store-dark-accent,
+      warn: $sneaker-store-dark-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($sneaker-store-light-theme);
+
+.darkMode {
+  @include mat.all-component-themes($sneaker-store-dark-theme);
+}
+
+$accent: map-get(theme.$light-accent, 500);
+
+// Global Styles
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+@font-face {
+  font-family: kumbh-sans;
+  src: url("./assets/fonts/KumbhSans-VariableFont_wght.ttf");
+}
+body {
+  height: 100%;
+  font-family: kumbh-sans;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+.full-height {
+  height: 100%;
+}
+.full-width {
+  width: 100%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+.content-container {
+  // max-width: 1400px;
+  padding: 50px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+@media screen and (max-width: 599px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  min-height: 50px;
+  background: #ffdf00;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ffdf00;
+}

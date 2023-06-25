@@ -1,0 +1,7 @@
+<div class="rotating-carousel-main-container" [style.flex-direction]="rightToLeft ? 'row-reverse' : 'row'">
+  <p>{{ title }}</p>
+  <div [id]="containerId" class="rotating-carousel-container">
+    <img class="rotating-carousel-item" *ngFor="let sneaker of sneakers" [src]="sneaker.image" 
+    (click)="sneakerSelected(sneaker.id)"  alt="{{ sneaker.name + 'image' }}">
+  </div>
+</div>

@@ -1,0 +1,128 @@
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 2rem;
+
+    svg {
+      cursor: pointer;
+    }
+
+    .nav {
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      column-gap: 1rem;
+      justify-content: center;
+      align-items: center;
+
+      .active {
+        color: #ffd700;
+        border-bottom: 2px solid #ffd700;
+      }
+    }
+  }
+
+  &-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .theme-selector-container {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+.mobile-header-content {
+  display: none;
+}
+
+@media screen and (max-width: 599px) {
+  .mobile-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-content {
+    display: none;
+  }
+  .theme-selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: 350px !important;
+  cursor: pointer;
+
+  .mat-menu-content {
+    .cartMenu {
+      &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &--padding {
+        padding: 10px;
+      }
+
+      .cartItems {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .mat-list-item {
+      margin-bottom: 10px;
+    }
+
+    .mat-list-item-content {
+      .cartItem-name {
+        word-break: break-word;
+      }
+
+      .cartItem-container {
+        width: 100%;
+        height: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .cartItem-image-container {
+          flex: 2;
+          height: inherit;
+          max-width: 50px;
+
+          .cartItem-image {
+            border-radius: 5px;
+            height: 100%;
+            width: 100%;
+          }
+        }
+
+        .cartItem-details-container {
+          flex: 5;
+          padding: 0px 15px;
+        }
+
+        .cartItem-actions-container {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

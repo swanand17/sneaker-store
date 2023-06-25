@@ -1,0 +1,32 @@
+<div class="sneaker-details-container mat-app-background content-container full-height full-width">
+  <div class="sneaker-details-left full-height">
+    <!-- <div class="sneaker-details-image full-height full-width"> -->
+      <img [src]="selectedSneaker.image" alt="{{selectedSneaker.name}}">
+    <!-- </div> -->
+  </div>
+  <div class="sneaker-details-right">
+    <div class="sneaker-details-info full-width">
+      <h3>{{ selectedSneaker.brand }}</h3>
+      <h1>{{ selectedSneaker.name }}</h1>
+      <p>{{ selectedSneaker.description }}</p>
+      <!-- <span>Discounted price</span><span>Discount %</span> -->
+      <p>{{ selectedSneaker.price | currency:'INR' }}</p>
+    </div>
+    <div class="sneaker-details-actions">
+      <div class="sneaker-details-quantity">
+        <button mat-icon-button matPrefix (click)="changeSneakerQuantity('remove')" aria-label="remove 1 quantity" color="accent">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <input title="Sneaker Quantity" type="number" [formControl]="sneakerQuantity" readonly>
+        <button mat-icon-button matSuffix (click)="changeSneakerQuantity('add')" aria-label="add 1 quantity" color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button color="accent" (click)="addToCart()" class="btn_addToCart">
+        <mat-icon>shopping_cart</mat-icon>
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>
+

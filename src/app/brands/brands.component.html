@@ -1,0 +1,13 @@
+<div *ngIf="!selectedBrand" class="brands-conatiner mat-app-background full-height full-width">
+  <div class="brand-cards content-container">    
+    <mat-card class="brand-card" *ngFor="let brand of brandList" (click)="viewSneakers(brand.name)">
+        <div class="brand-img full-height full-width">
+          <img [src]="brand.logo" alt="{{ brand.name }}" >
+        </div>
+        <div class="brand-name full-height full-width">
+          <h1>{{ brand.name }}</h1>
+        </div> 
+    </mat-card>
+  </div>
+</div>
+<app-sneakers *ngIf="selectedBrand" [brand]="selectedBrand"></app-sneakers>

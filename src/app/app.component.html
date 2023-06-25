@@ -1,0 +1,26 @@
+<mat-drawer-container class="mobile-sidnav-container full-height mat-app-background" autosize>
+  <app-header (themeChangedEvent)="isDarkModeSelected($event)" (toggleSidenavEvent)="toggleSidenav()"></app-header>
+  <mat-drawer #sidenav class="sidenav" mode="over" (click)="toggleSidenav()">
+    <mat-list class="nav">
+      <mat-list-item class="theme-selector-container">
+        <mat-icon matTooltip="Light mode">brightness_5</mat-icon>
+        <mat-slide-toggle [formControl]="themeControl" (change)="toggleTheme()">
+        </mat-slide-toggle>
+        <mat-icon matTooltip="Dark mode">bedtime</mat-icon>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="home" routerLinkActive="active">Home</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="brands" routerLinkActive="active">Brands</mat-list-item>
+      <mat-divider></mat-divider> 
+      <mat-list-item [routerLink]="['sneakers']" [queryParams]="{gender: 'Male'}" routerLinkActive="active">Men</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item [routerLink]="['sneakers']" [queryParams]="{gender: 'Female'}" routerLinkActive="active">Women</mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-drawer>
+
+  <!-- <div class="mat-app-background full-height full-width"> -->
+    <router-outlet></router-outlet>
+  <!-- </div> -->
+</mat-drawer-container>

@@ -1,0 +1,40 @@
+.rotating-carousel {
+  &-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      padding: 2rem;
+      font-size: 4rem;
+      font-weight: 900;
+    }
+  }
+  &-container {
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    overflow: hidden;
+  }
+  &-item {
+    cursor: pointer;
+    height: 15rem;
+    width: 15rem;
+  }
+}
+@media screen and (max-width: 599px) {
+  .rotating-carousel {
+    &-main-container {
+      flex-direction: column !important;
+      p {
+        padding-top: 2rem;
+        font-size: 3.5rem;
+      }
+    }
+    &-container {
+      max-width: 100%;
+      overflow: hidden;
+    }
+  }
+}

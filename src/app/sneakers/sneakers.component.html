@@ -1,0 +1,81 @@
+<mat-drawer-container class="sneakers-container mat-app-background full-width" hasBackdrop="true">
+  <mat-drawer #filterDrawer mode="over">
+    <form [formGroup]="filterFormGroup" class="filter-form" (ngSubmit)="applyFilters()">
+      <div class="filter-header">
+        <h2>Filters</h2>
+        <button type="button" mat-icon-button (click)="filterDrawer.close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Brands</mat-label>
+        <mat-select formControlName="brandsFormControl" multiple>
+          <mat-select-trigger>
+            {{filterFormGroup.get('brandsFormControl')?.value?.[0] || ''}}
+            <span *ngIf="(filterFormGroup.get('brandsFormControl')?.value?.length || 0) > 1">
+              (+{{ (filterFormGroup.get("brandsFormControl")?.value?.length || 0) - 1 }}
+              {{ filterFormGroup.get("brandsFormControl")?.value?.length === 2 ? "other": "others" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let brand of brandList" [value]="brand"> 
+            {{ brand }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="sortFormControl" aria-label="Select a sorting order">
+        <p>Sort By Price:</p>
+        <div class="radio-sortBy">
+          <mat-radio-button value="Price: Low to High">Low to High</mat-radio-button>
+          <mat-radio-button value="Price: High to Low">High to Low</mat-radio-button>
+        </div>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="genderFormControl" aria-label="Select a gender">
+        <p>Gender:</p>
+        <mat-radio-button value="Male">Male</mat-radio-button>
+        <mat-radio-button value="Female">Female</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-divider></mat-divider>
+      <div class="filter-form-actions full-width">
+        <button mat-stroked-button type="button"color="warn" (click)="resetFilters(); filterDrawer.close()">
+          Reset Filters
+        </button>
+        <button mat-raised-button type="submit" color="accent" (click)="filterDrawer.close()">
+          Apply Filters
+        </button>
+      </div>
+    </form>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <mat-toolbar class="sneakers-filters full-width">
+      <button mat-flat-button type="button" color="accent" (click)="filterDrawer.open()">
+        <mat-icon>tune</mat-icon>
+        Filter
+      </button>
+      <div class="applied-filters-container" *ngIf="filterList.length">
+        <label>Applied Filters:&nbsp;&nbsp;</label>
+        <mat-chip-list>
+          <mat-chip color="accent" *ngFor="let filter of filterList">
+            {{ filter }}
+            <button matChipRemove (click)="removeFilterChip(filter)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-toolbar>
+    <div class="sneakers-list-container content-container full-width">
+      <mat-card class="full-width full-height" *ngFor="let sneaker of filteredSneakerList" (click)="viewSneakerDetails(sneaker)">
+        <img mat-card-image [src]="sneaker.image" alt="" />
+        <mat-card-content class="full-width full-height">
+          <h3>{{ sneaker.brand }}</h3>
+          <p>{{ sneaker.name }}</p>
+          <p>{{ sneaker.price | currency : "INR" }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

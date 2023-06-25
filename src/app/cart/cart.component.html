@@ -1,0 +1,115 @@
+<div class="table-container content-container mat-app-background full-width" *ngIf="cart.items.length">
+  <table mat-table [dataSource]="dataSource" class="full-height full-width">
+    <!-- Product Column -->
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef>Product</th>
+      <td mat-cell *matCellDef="let element">
+        <img src="{{ element.image }}" alt="product" class="sneaker-image" />
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <button mat-raised-button (click)="goToHome()">
+          Continue Shopping
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="font-bold py-5 block">{{ element.name }}</span>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.price | currency : "INR" }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="onRemoveQuantity(element)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span>{{ element.quantity }}</span>
+        <button mat-icon-button (click)="onAddQuantity(element)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quantity * element.price | currency : "INR" }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <span>
+          {{ getCartTotal(cart.items) | currency : "INR" }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef class="action-column">
+        <button mat-raised-button (click)="onClearCart()" color="warn">
+          Remove All
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let element" class="action-column">
+        <button mat-mini-fab color="warn" (click)="onRemoveFromCart(element)" matTooltip="Remove">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="action-column">
+        <button mat-raised-button color="accent">Proceed To Checkout</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+</div>
+
+<div class="mobile-cart-container mat-app-background full-width" *ngIf="cart.items.length">
+  
+  <h2>Cart Total&nbsp;:&nbsp;&nbsp;{{ getCartTotal(cart.items) | currency:'INR'}}</h2>
+<button mat-raised-button color="accent">Proceed To Checkout</button>
+
+  <mat-card *ngFor="let item of cart.items" class="mobile-cart-item">
+    <div class="mobile-cart-item-top full-width">
+      <img [src]="item.image" alt="{{ item.name }}"/>
+      <div class="mobile-cart-item-top-right">
+        <p>{{ item.name }}</p>
+        <p>{{ item.price | currency:'INR' }}</p>
+      </div>
+    </div>
+    <div class="mobile-cart-item-bottom full-width">
+       <div class="mobile-cart-item-bottom-left full-width">
+        <mat-icon (click)="onRemoveQuantity(item)">remove</mat-icon>
+        <span>{{ item.quantity }}</span>
+        <mat-icon (click)="onAddQuantity(item)">add</mat-icon>  
+      </div>
+      <p>{{ (item.quantity * item.price) | currency:'INR' }}</p>
+    </div>
+  </mat-card>
+
+</div>
+<div class="empty-cart-container content-container mat-app-background full-height full-width" *ngIf="!cart.items.length">
+  <h2>Oh! It seems your cart is empty</h2>
+  <button mat-raised-button type="button" (click)="goToHome()" color="primary">
+    Start shopping now
+  </button>
+</div>

@@ -1,0 +1,25 @@
+<div class="home-container mat-app-background full-height full-width">
+  <div class="home-carousel-container full-width">
+    <div class="carousel-controls full-width">
+      <div class="carousel-controls-left full-height" (click)="previousCarouselSlide()">
+        <mat-icon class="carousel-controls-arrows">keyboard_arrow_left</mat-icon>
+      </div>
+      <div class="carousel-controls-right full-height" (click)="nextCarouselSlide()">
+        <mat-icon class="carousel-controls-arrows">keyboard_arrow_right</mat-icon>
+      </div>
+    </div>
+    <div class="carousel-slide full-height full-width" *ngFor="let carouselSlide of carouselSlideList; let i = index" 
+    [ngStyle]="{ display: i === currentCarouselSlideIndex ? 'flex' : 'none' }">
+      <div class="carousel-slide-image full-height full-width" 
+      [ngStyle]="{'background-image': 'url(../../assets/images/carousel-slides/' +  carouselSlide.image +  ')'}">
+      </div>
+      <div class="carousel-slide-text" (click)="navigate(i)">
+        <h2><i>{{ carouselSlide.text }}</i></h2>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let rotatingCarousel of rotatingCarousels">
+    <app-rotating-carousel [title]="rotatingCarousel.title" [containerId]="rotatingCarousel.containerId" [sneakers]="rotatingCarousel.sneakers" [rightToLeft]="rotatingCarousel.rightToLeft">
+    </app-rotating-carousel>
+  </div>
+</div>
